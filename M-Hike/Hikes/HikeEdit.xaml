@@ -1,0 +1,201 @@
+<ContentPage
+    x:Class="M_Hike.Hikes.HikeEdit"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Hike Details">
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="8">
+
+            <Label Text="Name *" />
+            <Border
+                Margin="0,0,0,16"
+                Padding="8"
+                BackgroundColor="Transparent"
+                Stroke="LightGray"
+                StrokeShape="RoundRectangle 8"
+                StrokeThickness="1">
+                <Entry
+                    x:Name="editName"
+                    Keyboard="Text"
+                    Placeholder="Enter name"
+                    Text="{Binding Name}" />
+            </Border>
+
+            <Label Margin="0,16,0,0" Text="Date *" />
+            <Border
+                Margin="0,0,0,16"
+                Padding="8"
+                BackgroundColor="Transparent"
+                Stroke="LightGray"
+                StrokeShape="RoundRectangle 8"
+                StrokeThickness="1">
+                <DatePicker x:Name="editDate" />
+            </Border>
+
+            <Label Margin="0,16,0,0" Text="Location *" />
+            <Border
+                Margin="0,0,0,16"
+                Padding="8"
+                BackgroundColor="Transparent"
+                Stroke="LightGray"
+                StrokeShape="RoundRectangle 8"
+                StrokeThickness="1">
+                <Entry
+                    x:Name="editLocation"
+                    Keyboard="Text"
+                    Placeholder="Enter location"
+                    Text="{Binding Location}" />
+            </Border>
+
+            <Label Margin="0,16,0,0" Text="Parking Available *" />
+            <HorizontalStackLayout Margin="0,0,0,16" Spacing="12">
+                <RadioButton
+                    x:Name="hikeParkingAvailableButton"
+                    Content="Yes"
+                    GroupName="Parking" />
+                <RadioButton
+                    x:Name="hikeParkingUnavailableButton"
+                    Content="No"
+                    GroupName="Parking" />
+            </HorizontalStackLayout>
+
+            <Label Text="Length *" />
+            <Border
+                Margin="0,0,0,16"
+                Padding="8"
+                BackgroundColor="Transparent"
+                Stroke="LightGray"
+                StrokeShape="RoundRectangle 8"
+                StrokeThickness="1">
+                <Entry
+                    x:Name="editLength"
+                    Keyboard="Numeric"
+                    Placeholder="Enter hike length"
+                    Text="{Binding Length}" />
+            </Border>
+
+            <Label Margin="0,16,0,0" Text="Difficulty *" />
+            <Slider
+                x:Name="difficultySlider"
+                Maximum="10"
+                Minimum="1"
+                Value="{Binding Difficulty}" />
+            <Label HorizontalOptions="Center" Text="{Binding Source={x:Reference difficultySlider}, Path=Value, StringFormat='{0:F0}'}" />
+
+            <HorizontalStackLayout Margin="0,16,0,0" Spacing="10">
+                <Label Text="Hike Members" VerticalOptions="Center" />
+                <ImageButton
+                    x:Name="addHikeMemberButton"
+                    Clicked="AddHikeMember_Clicked"
+                    Source="add_icon.png"
+                    Style="{StaticResource ActionButton}" />
+            </HorizontalStackLayout>
+
+            <VerticalStackLayout x:Name="hikeMembersContainer" Margin="0,0,0,16">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            Margin="0,4,0,4"
+                            Padding="8"
+                            BackgroundColor="Transparent"
+                            Stroke="LightGray"
+                            StrokeShape="RoundRectangle 8"
+                            StrokeThickness="1">
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                <Entry
+                                    Grid.Column="0"
+                                    Placeholder="Enter hike member"
+                                    Text="{Binding Value}" />
+                                <ImageButton
+                                    Grid.Column="1"
+                                    Clicked="DeleteHikeMember_Clicked"
+                                    CommandParameter="{Binding .}"
+                                    Source="delete_icon.png"
+                                    Style="{StaticResource ActionButton}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="Gear" VerticalOptions="Center" />
+                <ImageButton
+                    x:Name="addGearButton"
+                    Clicked="AddGear_Clicked"
+                    Source="add_icon.png"
+                    Style="{StaticResource ActionButton}" />
+            </HorizontalStackLayout>
+
+            <VerticalStackLayout x:Name="gearsContainer" Margin="0,0,0,16">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            Margin="0,4,0,4"
+                            Padding="8"
+                            BackgroundColor="Transparent"
+                            Stroke="LightGray"
+                            StrokeShape="RoundRectangle 8"
+                            StrokeThickness="1">
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                <Entry
+                                    Grid.Column="0"
+                                    Placeholder="Enter gear"
+                                    Text="{Binding Value}" />
+                                <ImageButton
+                                    Grid.Column="1"
+                                    Clicked="DeleteGear_Clicked"
+                                    CommandParameter="{Binding .}"
+                                    Source="delete_icon.png"
+                                    Style="{StaticResource ActionButton}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+
+            <Label Margin="0,16,0,0" Text="Description" />
+            <Border
+                Margin="0,0,0,16"
+                Padding="8"
+                BackgroundColor="Transparent"
+                Stroke="LightGray"
+                StrokeShape="RoundRectangle 8"
+                StrokeThickness="1">
+                <Editor
+                    x:Name="editDescription"
+                    AutoSize="TextChanges"
+                    HeightRequest="100"
+                    Placeholder="Enter description" />
+            </Border>
+
+            <Button
+                x:Name="saveHikeButton"
+                Margin="0,16,0,0"
+                Clicked="SaveButton_Clicked"
+                HorizontalOptions="Start"
+                Text="SAVE HIKE" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+    <ContentPage.Resources>
+        <Style TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="HeightRequest" Value="48" />
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="HeightRequest" Value="48" />
+        </Style>
+        <Style TargetType="Editor">
+            <Setter Property="BackgroundColor" Value="Transparent" />
+        </Style>
+        <Style x:Key="ActionButton" TargetType="ImageButton">
+            <Setter Property="WidthRequest" Value="12" />
+            <Setter Property="HeightRequest" Value="12" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+        </Style>
+    </ContentPage.Resources>
+</ContentPage>

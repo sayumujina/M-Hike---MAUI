@@ -1,0 +1,63 @@
+﻿<ContentPage
+    x:Class="M_Hike.HikeList"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:M_Hike"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title="Hikes">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Clicked="AddButton_Clicked"
+            Order="Primary"
+            Priority="0"
+            Text="Add" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto, Auto, *" RowSpacing="0">
+
+        <Grid
+            x:Name="optionsBar"
+            Grid.Row="1"
+            Padding="16,0"
+            ColumnDefinitions="*,Auto,*">
+
+            <Button
+                x:Name="selectAllButton"
+                Grid.Column="1"
+                Clicked="SelectAll_Clicked"
+                HorizontalOptions="Center"
+                Text="Select All"
+                VerticalOptions="Center" />
+
+            <ImageButton
+                x:Name="trashIcon"
+                Grid.Column="2"
+                Aspect="AspectFit"
+                Clicked="DeleteButton_Clicked"
+                HeightRequest="40"
+                HorizontalOptions="End"
+                Source="trash_icon.png"
+                WidthRequest="40">
+                <ImageButton.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="Red" />
+                </ImageButton.Behaviors>
+            </ImageButton>
+
+        </Grid>
+
+        <CollectionView
+            x:Name="hikeCollectionView"
+            Grid.Row="2"
+            Margin="16,0">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <local:HikeListCollectionViewTemplate />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

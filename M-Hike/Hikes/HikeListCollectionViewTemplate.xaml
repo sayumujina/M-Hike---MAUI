@@ -1,0 +1,102 @@
+<ContentView
+    x:Class="M_Hike.HikeListCollectionViewTemplate"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:M_Hike.Models"
+    xmlns:utilities="clr-namespace:M_Hike.Utilities"
+    x:DataType="models:Hike">
+
+    <ContentView.Resources>
+        <utilities:StringJoinConverter x:Key="StringJoinConverter" />
+    </ContentView.Resources>
+
+    <Grid RowDefinitions="Auto, Auto, *" RowSpacing="0">
+
+        <VerticalStackLayout Padding="16" Spacing="0">
+
+            <VerticalStackLayout Spacing="0">
+
+                <Grid ColumnDefinitions="*,Auto">
+
+                    <HorizontalStackLayout VerticalOptions="Center">
+
+                        <CheckBox
+                            Margin="0,0,8,0"
+                            IsChecked="{Binding IsSelected}"
+                            WidthRequest="22" />
+
+                        <VerticalStackLayout>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="{Binding Name}" />
+                            <Label
+                                Margin="0,4,0,0"
+                                FontSize="14"
+                                Text="{Binding Location}"
+                                TextColor="Gray" />
+                            <Label
+                                Margin="0,2,0,0"
+                                FontSize="14"
+                                Text="{Binding Date, StringFormat='{0:d}'}"
+                                TextColor="Gray" />
+
+                        </VerticalStackLayout>
+
+                    </HorizontalStackLayout>
+
+                    <Button
+                        Grid.Column="1"
+                        Clicked="EditButton_Clicked"
+                        HorizontalOptions="End"
+                        Text="Edit"
+                        VerticalOptions="Center" />
+
+                </Grid>
+
+            </VerticalStackLayout>
+
+            <VerticalStackLayout
+                x:Name="DetailedLayout"
+                Margin="0,16,0,0"
+                IsVisible="{Binding IsExpanded}">
+
+                <VerticalStackLayout Margin="0,0,0,8">
+                    <Label FontAttributes="Bold" Text="Length: " />
+                    <Label Text="{Binding Length}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Margin="0,0,0,8">
+                    <Label FontAttributes="Bold" Text="Difficulty: " />
+                    <Label Text="{Binding Difficulty}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Margin="0,0,0,16">
+                    <Label FontAttributes="Bold" Text="Parking Available: " />
+                    <Label Text="{Binding ParkingAvailability}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Margin="0,0,0,16">
+                    <Label FontAttributes="Bold" Text="Members" />
+                    <Label Text="{Binding Members, Converter={StaticResource StringJoinConverter}}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Margin="0,0,0,16">
+                    <Label FontAttributes="Bold" Text="Gear: " />
+                    <Label Text="{Binding Gear, Converter={StaticResource StringJoinConverter}}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Margin="0,0,0,8">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        Text="Description" />
+                    <Label Text="{Binding Description}" />
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentView>
