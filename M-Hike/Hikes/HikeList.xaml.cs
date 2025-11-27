@@ -93,6 +93,12 @@ namespace M_Hike
         // Delete selected hikes
         private async void DeleteButton_Clicked(object sender, EventArgs e)
         {
+            // Do nothing if no hikes are selected
+            if (!Hikes.Any(h => h.IsSelected))
+            {
+                return;
+            }
+
             // Display a confirmation dialog first
             bool confirm = await DisplayAlert("Confirm Deletion", "Are you sure you want to delete the selected hikes?", "Yes", "No");
             if (!confirm)
