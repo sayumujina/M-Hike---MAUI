@@ -166,7 +166,8 @@
                     x:Name="editDescription"
                     AutoSize="TextChanges"
                     HeightRequest="100"
-                    Placeholder="Enter description" />
+                    Placeholder="Enter description"
+                    Text="{Binding Description}" />
             </Border>
 
             <Button
