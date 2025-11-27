@@ -165,7 +165,7 @@ public partial class HikeEdit : ContentPage
             "Location: " + editLocation.Text + "\n" +
             "Length: " + editLength.Text + "\n" +
             "Date: " + editDate.Date.ToString("d") + "\n" +
-            "Difficulty: " + difficultySlider.Value + "\n" +
+            "Difficulty: " + Math.Floor(difficultySlider.Value) + "\n" +
             "Parking Available: " + (hikeParkingAvailableButton.IsChecked ? "Yes" : "No") + "\n" +
             "Members: " + string.Join(", ", HikeMembers.Select(m => m.Value)) + "\n" +
             "Gears: " + string.Join(", ", HikeGears.Select(g => g.Value)) + "\n"+
@@ -181,7 +181,7 @@ public partial class HikeEdit : ContentPage
                 Location = editLocation.Text,
                 Length = double.Parse(editLength.Text),
                 Date = editDate.Date,
-                Difficulty = (int)difficultySlider.Value,
+                Difficulty = (int)(Math.Floor(difficultySlider.Value)),
                 ParkingAvailability = hikeParkingAvailableButton.IsChecked,
                 Members = string.Join(", ", HikeMembers.Select(m => m.Value)),
                 Gear = string.Join(", ", HikeGears.Select(g => g.Value)),

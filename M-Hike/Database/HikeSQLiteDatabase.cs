@@ -187,7 +187,7 @@ namespace M_Hike.Database
         {
             try
             {
-                return dbConnection.Table<Hike>().ToList();
+                return dbConnection.Table<Hike>().ToList().OrderByDescending(h => h.Id).ToList();
             }
             catch (SQLiteException ex)
             {
